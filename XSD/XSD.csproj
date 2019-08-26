@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>W3C.XSD</RootNamespace>
+    <AssemblyName>W3C.XSD</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XObjectsCore" Version="3.0.0.3" />
+  </ItemGroup>
 
 </Project>
