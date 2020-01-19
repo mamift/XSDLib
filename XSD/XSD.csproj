@@ -1,13 +1,26 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>W3C.XSD</RootNamespace>
-    <AssemblyName>W3C.XSD</AssemblyName>
+    <AssemblyName>XSDLib</AssemblyName>
+    <PackageId>XSDLib</PackageId>
+    <Authors>Muhammad Miftah</Authors>
+    <Company />
+    <Product>XSDLib</Product>
+    <Description>A library for reading XSD files (supports W3C XSD 1.0)</Description>
+    <Copyright>Muhammad Miftah</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/mamift/XSDLib</RepositoryUrl>
+    <PackageLicense>https://licenses.nuget.org/MIT</PackageLicense>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mamift/XSDLib</PackageProjectUrl>
+    <PackageTags>XSD</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="XObjectsCore" Version="3.0.0.3" />
+    <PackageReference Include="XObjectsCore" Version="3.0.0.6" />
   </ItemGroup>
 
 </Project>

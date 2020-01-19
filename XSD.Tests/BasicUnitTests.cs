@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 using NUnit.Framework;
 using W3C.XSD;
 
@@ -14,6 +15,28 @@ namespace XSD.Tests
         {
             XsdXsd = schema.Load(@"XMLSchema_v1.xsd");
             XmlXsd = schema.Load(@"xml.xsd");
+        }
+
+        [Test]
+        public void CreateSchemaTest()
+        {
+            var schema = new schema();
+            var globalAttr = new attribute(new topLevelAttribute() {
+                name = "name"
+            });
+
+            var globalEl = new element(new topLevelElement() {
+                name = "anElement",
+                complexType = new localComplexType() {
+                    attribute = { new attributeType() { @ref = new XmlQualifiedName("name") } }
+                }
+            });
+
+            schema.attribute.Add(globalAttr);
+            schema.element.Add(globalEl);
+
+            Assert.IsNotEmpty(schema.attribute);
+            Assert.IsNotEmpty(schema.element);
         }
 
         [Test]
