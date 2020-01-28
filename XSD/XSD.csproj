@@ -17,10 +17,11 @@
     <PackageProjectUrl>https://github.com/mamift/XSDLib</PackageProjectUrl>
     <PackageTags>XSD</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Version>1.0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="XObjectsCore" Version="3.0.0.6" />
+    <PackageReference Include="XObjectsCore" Version="3.0.0.7" />
   </ItemGroup>
 
 </Project>
