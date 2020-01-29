@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:simpleType name="Identifier">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[\w]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NonWordCharacter">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\W"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

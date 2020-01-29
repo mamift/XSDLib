@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Linq;
+using NUnit.Framework;
+using Xml.Schema.Linq.Extensions;
 
 namespace W3C.XSD.Tests
 {
@@ -36,6 +39,30 @@ namespace W3C.XSD.Tests
             var resolved = XmlXsd.ResolveIncludes();
 
             Assert.AreEqual(resolved, XmlXsd);
+        }
+
+        [Test]
+        public void TestResolveIncludesWithRelativeUris()
+        {
+            Assert.DoesNotThrow(() => {
+                var resolvedLocalTest = localTestXsd.ResolveIncludes();
+                Assert.IsTrue(resolvedLocalTest.attribute.Count == 2);
+            });
+        }
+
+        [Test]
+        public void TestIncludeUrisThatAreLocal()
+        {
+            Assert.IsTrue(localTestXsd.include.All(i => !i.schemaLocation.IsAbsoluteUri));
+            Assert.IsTrue(localTestXsd.include.All(i => !i.schemaLocation.UserEscaped));
+            Assert.IsTrue(localTestXsd.include.All(i => i.schemaLocation.OriginalString.IsNotEmpty()));
+
+            Assert.Throws<InvalidOperationException>(() => {
+                localTestXsd.include.Any(i => i.schemaLocation.IsDefaultPort);
+                localTestXsd.include.Any(i => i.schemaLocation.IsFile);
+                localTestXsd.include.Any(i => i.schemaLocation.IsLoopback);
+                localTestXsd.include.Any(i => i.schemaLocation.IsUnc);
+            });
         }
     }
 }

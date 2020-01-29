@@ -17,7 +17,10 @@ namespace W3C.XSD
             var resolvedSchema = (schema)Clone();
 
             foreach (var inc in include) {
-                var includedSchema = schema.Load(inc.schemaLocation.LocalPath);
+                var filePath = inc.schemaLocation.IsAbsoluteUri
+                    ? inc.schemaLocation.AbsolutePath
+                    : inc.schemaLocation.OriginalString;
+                var includedSchema = schema.Load(filePath);
                 resolvedSchema = resolvedSchema.Cascade(includedSchema);
             }
 
@@ -33,25 +36,23 @@ namespace W3C.XSD
         {
             var anotherWithResolvedIncludes = another.ResolveIncludes();
 
-            var cascadedSchema = new schema();
-            cascadedSchema.redefine = redefine.Merge(anotherWithResolvedIncludes.redefineField);
-            cascadedSchema.annotation = annotation.Merge(anotherWithResolvedIncludes.annotation);
-            cascadedSchema.attribute = attribute.Merge(anotherWithResolvedIncludes.attribute);
-            cascadedSchema.attributeGroup = attributeGroup.Merge(anotherWithResolvedIncludes.attributeGroup);
-            cascadedSchema.attributeFormDefault = anotherWithResolvedIncludes.attributeFormDefault;
-            
-            cascadedSchema.complexType = complexType.Merge(anotherWithResolvedIncludes.complexType);
-            cascadedSchema.element = element.Merge(anotherWithResolvedIncludes.element);
-            cascadedSchema.elementFormDefault = elementFormDefault ?? anotherWithResolvedIncludes.elementFormDefault;
-            
-            cascadedSchema.group = group.Merge(anotherWithResolvedIncludes.group);
-            cascadedSchema.import = import.Merge(anotherWithResolvedIncludes.import);
-            cascadedSchema.id = id ?? anotherWithResolvedIncludes.id;
-            
-            cascadedSchema.notation = notation.Merge(anotherWithResolvedIncludes.notation);
-            cascadedSchema.simpleType = simpleType.Merge(anotherWithResolvedIncludes.simpleType);
-            cascadedSchema.targetNamespace = targetNamespace ?? anotherWithResolvedIncludes.targetNamespace;
-            cascadedSchema.version = version ?? anotherWithResolvedIncludes.version;
+            var cascadedSchema = new schema {
+                redefine = redefine.Merge(anotherWithResolvedIncludes.redefineField),
+                annotation = annotation.Merge(anotherWithResolvedIncludes.annotation),
+                attribute = attribute.Merge(anotherWithResolvedIncludes.attribute),
+                attributeGroup = attributeGroup.Merge(anotherWithResolvedIncludes.attributeGroup),
+                attributeFormDefault = anotherWithResolvedIncludes.attributeFormDefault,
+                complexType = complexType.Merge(anotherWithResolvedIncludes.complexType),
+                element = element.Merge(anotherWithResolvedIncludes.element),
+                elementFormDefault = elementFormDefault ?? anotherWithResolvedIncludes.elementFormDefault,
+                group = group.Merge(anotherWithResolvedIncludes.group),
+                import = import.Merge(anotherWithResolvedIncludes.import),
+                id = id ?? anotherWithResolvedIncludes.id,
+                notation = notation.Merge(anotherWithResolvedIncludes.notation),
+                simpleType = simpleType.Merge(anotherWithResolvedIncludes.simpleType),
+                targetNamespace = targetNamespace ?? anotherWithResolvedIncludes.targetNamespace,
+                version = version ?? anotherWithResolvedIncludes.version
+            };
 
             var possibleBlockDefaultValue = blockDefault ?? anotherWithResolvedIncludes.blockDefault;
             if (possibleBlockDefaultValue != null) cascadedSchema.blockDefault = possibleBlockDefaultValue;

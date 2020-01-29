@@ -32,4 +32,16 @@
     <ProjectReference Include="..\XSD\XSD.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="localImported.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="localIncluded.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="localTest.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
