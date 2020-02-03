@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.IO;
+using NUnit.Framework;
 
 namespace W3C.XSD.Tests
 {
@@ -13,8 +15,9 @@ namespace W3C.XSD.Tests
         [SetUp]
         public void Setup()
         {
-            XsdXsd = schema.Load(@"XMLSchema_v1.xsd");
             XmlXsd = schema.Load(@"xml.xsd");
+            var xmlXsdv1 = new FileInfo(@"XMLSchema_v1.xsd");
+            XsdXsd = schema.Load(xmlXsdv1);
             localTestXsd = schema.Load(@"localTest.xsd");
             localIncludedXsd = schema.Load(@"localIncluded.xsd");
         }

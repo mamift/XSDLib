@@ -1,26 +1,65 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using Xml.Schema.Linq;
+using Xml.Schema.Linq.Extensions;
 
 namespace W3C.XSD
 {
     public partial class schema
     {
         /// <summary>
+        /// Loads a new <see cref="schema"/> from an existing <see cref="System.IO.FileInfo"/>.
+        /// <para>The given <see cref="System.IO.FileInfo"/> is saved in the <see cref="FileInfo"/> property.</para>
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <returns></returns>
+        public static schema Load(FileInfo fileInfo)
+        {
+            var schema = XTypedServices.Load<schema>(fileInfo.FullName);
+            schema.FileInfo = fileInfo;
+
+            return schema;
+        }
+
+        public FileInfo FileInfo { get; private set; }
+
+        /// <summary>
         /// Returns a new instance of a <see cref="schema"/> which includes all the schema contents references in any <see cref="include"/>
         /// directives in the current schema.
         /// <para>When there are no <see cref="include"/> directives, returns the current schema.</para>
         /// </summary>
+        /// <param name="customDirectory">Search in a custom directory.</param>
         /// <returns></returns>
-        public schema ResolveIncludes()
+        public schema ResolveIncludes(string customDirectory = null)
         {
             if (!include.Any()) return this;
 
-            var resolvedSchema = (schema)Clone();
+            if (customDirectory != null && !Directory.Exists(customDirectory))
+                throw new DirectoryNotFoundException();
 
-            foreach (var inc in include) {
-                var filePath = inc.schemaLocation.IsAbsoluteUri
-                    ? inc.schemaLocation.AbsolutePath
-                    : inc.schemaLocation.OriginalString;
-                var includedSchema = schema.Load(filePath);
+            var resolvedSchema = (schema) Clone();
+
+            foreach (var includeDirective in include) {
+                schema includedSchema = null;
+                if (includeDirective.schemaLocation.IsAbsoluteUri) {
+                    if (includeDirective.schemaLocation.IsFile) {
+                        includedSchema = schema.Load(includeDirective.schemaLocation.AbsolutePath);
+                    }
+                    else {
+                        var downloadedString = WebRequest.Create(includeDirective.schemaLocation).GetRequestStream()
+                            .ReadAsString();
+                        includedSchema = schema.Parse(downloadedString);
+                    }
+                }
+                else {
+                    var possibleFolder = FileInfo?.DirectoryName ?? customDirectory ?? Environment.CurrentDirectory;
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    var xmlFile = Path.Combine(possibleFolder, includeDirective.schemaLocation.OriginalString);
+                    includedSchema = schema.Load(xmlFile);
+                }
+
                 resolvedSchema = resolvedSchema.Cascade(includedSchema);
             }
 

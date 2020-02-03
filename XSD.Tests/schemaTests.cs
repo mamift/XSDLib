@@ -46,7 +46,7 @@ namespace W3C.XSD.Tests
         {
             Assert.DoesNotThrow(() => {
                 var resolvedLocalTest = localTestXsd.ResolveIncludes();
-                Assert.IsTrue(resolvedLocalTest.attribute.Count == 2);
+                Assert.IsTrue(resolvedLocalTest.simpleType.Count == 2);
             });
         }
 
