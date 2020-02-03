@@ -23,6 +23,9 @@ namespace W3C.XSD
             return schema;
         }
 
+        /// <summary>
+        /// Preserves the original <see cref="FileInfo"/> object that may have been given using the <see cref="Load(System.IO.FileInfo)"/> method.
+        /// </summary>
         public FileInfo FileInfo { get; private set; }
 
         /// <summary>
@@ -76,21 +79,22 @@ namespace W3C.XSD
             var anotherWithResolvedIncludes = another.ResolveIncludes();
 
             var cascadedSchema = new schema {
-                redefine = redefine.Merge(anotherWithResolvedIncludes.redefineField),
-                annotation = annotation.Merge(anotherWithResolvedIncludes.annotation),
-                attribute = attribute.Merge(anotherWithResolvedIncludes.attribute),
-                attributeGroup = attributeGroup.Merge(anotherWithResolvedIncludes.attributeGroup),
+                redefine = redefine.Concatenate(anotherWithResolvedIncludes.redefineField),
+                annotation = annotation.Concatenate(anotherWithResolvedIncludes.annotation),
+                attribute = attribute.Concatenate(anotherWithResolvedIncludes.attribute),
+                attributeGroup = attributeGroup.Concatenate(anotherWithResolvedIncludes.attributeGroup),
                 attributeFormDefault = anotherWithResolvedIncludes.attributeFormDefault,
-                complexType = complexType.Merge(anotherWithResolvedIncludes.complexType),
-                element = element.Merge(anotherWithResolvedIncludes.element),
+                complexType = complexType.Concatenate(anotherWithResolvedIncludes.complexType),
+                element = element.Concatenate(anotherWithResolvedIncludes.element),
                 elementFormDefault = elementFormDefault ?? anotherWithResolvedIncludes.elementFormDefault,
-                group = group.Merge(anotherWithResolvedIncludes.group),
-                import = import.Merge(anotherWithResolvedIncludes.import),
+                group = group.Concatenate(anotherWithResolvedIncludes.group),
+                import = import.Concatenate(anotherWithResolvedIncludes.import),
                 id = id ?? anotherWithResolvedIncludes.id,
-                notation = notation.Merge(anotherWithResolvedIncludes.notation),
-                simpleType = simpleType.Merge(anotherWithResolvedIncludes.simpleType),
+                notation = notation.Concatenate(anotherWithResolvedIncludes.notation),
+                simpleType = simpleType.Concatenate(anotherWithResolvedIncludes.simpleType),
                 targetNamespace = targetNamespace ?? anotherWithResolvedIncludes.targetNamespace,
-                version = version ?? anotherWithResolvedIncludes.version
+                version = version ?? anotherWithResolvedIncludes.version,
+                FileInfo = FileInfo
             };
 
             var possibleBlockDefaultValue = blockDefault ?? anotherWithResolvedIncludes.blockDefault;

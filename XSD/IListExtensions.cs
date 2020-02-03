@@ -21,9 +21,17 @@ namespace W3C.XSD
         {
             if (others == null) return list;
 
-            var concatenated = list.Concat(others);
+            list.AddRange(others);
 
-            return concatenated.ToList();
+            return list;
+        }
+
+        public static IList<T> Concatenate<T>(this IList<T> list, IEnumerable<T> others)
+            where T : XTypedElement
+        {
+            if (others == null) return list;
+
+            return list.Concat(others).ToList();
         }
 
         public static IList<T> DistinctMerge<T>(this IList<T> list, IEnumerable<T> others)

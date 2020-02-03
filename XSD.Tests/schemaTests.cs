@@ -23,12 +23,15 @@ namespace W3C.XSD.Tests
         [Test]
         public void TestCascadeAttributes()
         {
+            Assert.IsTrue(XmlXsd.attribute.Count == 4);
+
             var cascaded = XmlXsd.Cascade(new schema() {
                 attribute = {
                     new attribute(new topLevelAttribute() { name = "testingAttr" })
                 }
             });
 
+            // remains unchanged
             Assert.IsTrue(XmlXsd.attribute.Count == 4);
             Assert.IsTrue(cascaded.attribute.Count == 5);
         }
