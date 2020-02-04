@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xml.Schema.Linq;
 
-namespace W3C.XSD
+namespace W3C.XSD.Extensions
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public static partial class IListExtensions

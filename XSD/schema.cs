@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net;
+using W3C.XSD.Extensions;
 using Xml.Schema.Linq;
 using Xml.Schema.Linq.Extensions;
 
