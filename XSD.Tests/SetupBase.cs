@@ -16,8 +16,9 @@ namespace W3C.XSD.Tests
         public void Setup()
         {
             XmlXsd = schema.Load(@"xml.xsd");
-            var xmlXsdv1 = new FileInfo(@"XMLSchema_v1.xsd");
-            XsdXsd = schema.Load(xmlXsdv1);
+            var xmlXsdv1a = new FileInfo(@"xsdschema (ms-visualstudio version).xsd");
+            var xmlXsdv1b = new FileInfo(@"XMLSchema_v1.xsd");
+            XsdXsd = schema.Load(xmlXsdv1b);
             localTestXsd = schema.Load(@"localTest.xsd");
             localIncludedXsd = schema.Load(@"localIncluded.xsd");
         }
