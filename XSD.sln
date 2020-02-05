@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSD", "XSD\XSD.csproj", "{F2EC8453-275C-4AFE-B430-B4ECFC310575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSD", "XSD\XSD.csproj", "{F2EC8453-275C-4AFE-B430-B4ECFC310575}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSD.Tests", "XSD.Tests\XSD.Tests.csproj", "{C75632E9-7CB2-4EAA-B6D6-76C0856117FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSD.Tests", "XSD.Tests\XSD.Tests.csproj", "{C75632E9-7CB2-4EAA-B6D6-76C0856117FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,5 +27,14 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FDE9118-9DB8-4F01-BB3E-A0074C855D8D}
+	EndGlobalSection
+	GlobalSection(AutomaticVersions) = postSolution
+		UpdateAssemblyVersion = True
+		UpdateAssemblyFileVersion = False
+		UpdateAssemblyInfoVersion = False
+		AssemblyVersionSettings = None.None.None.Increment
+		UpdatePackageVersion = False
+		AssemblyInfoVersionType = SettingsVersion
+		InheritWinAppVersionFrom = None
 	EndGlobalSection
 EndGlobal
