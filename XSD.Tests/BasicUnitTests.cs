@@ -55,8 +55,6 @@ namespace W3C.XSD.Tests
             Assert.IsTrue(XsdXsd.notation.Count == 2);
             Assert.IsTrue(XsdXsd.redefine.Count == 0);
             Assert.IsTrue(XsdXsd.simpleType.Count == 55);
-
-            Assert.Pass();
         }
 
         [Test]
