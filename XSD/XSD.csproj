@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>W3C.XSD</RootNamespace>
@@ -17,11 +16,13 @@
     <PackageProjectUrl>https://github.com/mamift/XSDLib</PackageProjectUrl>
     <PackageTags>XSD</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Version>1.0.1.3</Version>
+    <Version>1.0.1.9</Version>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="XObjectsCore" Version="3.0.0.7" />
   </ItemGroup>
-
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command incrementNugetPackageBuildNumber.ps1 -csprojFile &quot;$(ProjectPath)&quot;; copyNugetPackages.ps1 -srcDir &quot;$(ProjectDir)bin\$(ConfigurationName)&quot; -destDir D:\nuget;" />
+  </Target>
 </Project>
