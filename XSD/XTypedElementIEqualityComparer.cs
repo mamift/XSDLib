@@ -21,6 +21,6 @@ namespace W3C.XSD
             return obj.Untyped.GetHashCode();
         }
 
-        public static readonly XTypedElementIEqualityComparer<T> Default = new XTypedElementIEqualityComparer<T>();
+        public static XTypedElementIEqualityComparer<T> Default { get; } = new XTypedElementIEqualityComparer<T>();
     }
 }
