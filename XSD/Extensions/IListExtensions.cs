@@ -37,7 +37,7 @@ namespace W3C.XSD.Extensions
         public static IList<T> DistinctMerge<T>(this IList<T> list, IEnumerable<T> others)
             where T: XTypedElement
         {
-            return list.Merge(others).Distinct(XTypedElementIEqualityComparer<T>.Default).ToList();
+            return list.Merge(others).Distinct(XTypedElementDeepEqualityComparer<T>.Default).ToList();
         }
     }
 }
