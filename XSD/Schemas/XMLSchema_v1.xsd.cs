@@ -3948,7 +3948,7 @@ namespace W3C.XSD {
         }
     }
     
-    public partial class pattern : XTypedElement, IXMetaData {
+    public partial class pattern: IXMetaData {
         
 		public static explicit operator pattern(XElement xe) { return XTypedServices.ToXTypedElement<pattern>(xe,LinqToXsdTypeManager.Instance as ILinqToXsdTypeManager); }
         

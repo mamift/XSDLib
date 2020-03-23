@@ -38,7 +38,7 @@ namespace W3C.XSD.Tests
             Assert.IsTrue(XsdXsd.elementFormDefault == "qualified");
             Assert.IsTrue(XsdXsd.targetNamespace == new Uri("http://www.w3.org/2001/XMLSchema"));
             Assert.IsTrue(XsdXsd.version == "1.0");
-            Assert.Throws<NullReferenceException>(() => Assert.IsNull(XsdXsd.lang));
+            Assert.DoesNotThrow(() => Assert.IsNotNull(XsdXsd.lang));
         }
 
         [Test]
