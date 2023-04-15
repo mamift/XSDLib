@@ -45,6 +45,13 @@
     <None Update="localTest.xsd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="SimpleTypes\st1.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SimpleTypes\" />
   </ItemGroup>
 
 </Project>

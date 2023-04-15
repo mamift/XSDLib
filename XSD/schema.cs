@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Xml;
+using System.Xml.Linq;
 using W3C.XSD.Extensions;
 using Xml.Schema.Linq;
 using Xml.Schema.Linq.Extensions;
@@ -108,6 +111,11 @@ namespace W3C.XSD
             //if (possibleLangValue != null && possibleLangValue != lang) cascadedSchema.lang = lang ?? anotherWithResolvedIncludes.lang;
 
             return cascadedSchema;
+        }
+
+        public simpleType GetGlobalSimpleTypeForName(XmlQualifiedName name)
+        {
+            return simpleType.FirstOrDefault(t => t.Content.name == name.Name);
         }
     }
 }

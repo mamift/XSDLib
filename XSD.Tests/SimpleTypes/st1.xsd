@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="urn:simpleTypesTest" xmlns:st="urn:simpleTypesTest">
+    <xs:simpleType name="objectDefinitionKeywords">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="class"/>
+            <xs:enumeration value="struct"/>
+            <xs:enumeration value="object"/>
+            <xs:enumeration value="interface"/>
+            <xs:enumeration value="protocol"/>
+            <xs:enumeration value="enum"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="namespaceKeyword">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="namespace"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="topLevelKeywords">
+        <xs:union memberTypes="st:objectDefinitionKeywords st:namespaceKeyword"/>
+    </xs:simpleType>
+</xs:schema>
