@@ -5,7 +5,7 @@ using Xml.Schema.Linq.Extensions;
 
 namespace W3C.XSD.Tests
 {
-    public class schemaTests: SetupBase
+    public class schemaTests : SetupBase
     {
         [Test]
         public void TestCascadeElements()
@@ -62,8 +62,14 @@ namespace W3C.XSD.Tests
 
             Assert.Throws<InvalidOperationException>(() => {
                 localTestXsd.include.Any(i => i.schemaLocation.IsDefaultPort);
+            });
+            Assert.Throws<InvalidOperationException>(() => {
                 localTestXsd.include.Any(i => i.schemaLocation.IsFile);
+            });
+            Assert.Throws<InvalidOperationException>(() => {
                 localTestXsd.include.Any(i => i.schemaLocation.IsLoopback);
+            });
+            Assert.Throws<InvalidOperationException>(() => {
                 localTestXsd.include.Any(i => i.schemaLocation.IsUnc);
             });
         }
