@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>W3C.XSD</RootNamespace>
@@ -22,7 +22,7 @@
   <ItemGroup>
     <PackageReference Include="XObjectsCore" Version="3.0.1" />
   </ItemGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -Command incrementNugetPackageBuildNumber.ps1 -csprojFile &quot;$(ProjectPath)&quot;; copyNugetPackages.ps1 -srcDir &quot;$(ProjectDir)bin\$(ConfigurationName)&quot; -destDir D:\nuget;" />
-  </Target>
+  </Target>-->
 </Project>
