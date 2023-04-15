@@ -7,6 +7,7 @@ namespace W3C.XSD.Tests
     public abstract class SetupBase
     {
         public schema XsdXsd { get; set; }
+        public schema XsdXsdVsVersion { get; set; }
         public schema XmlXsd { get; set; }
 
         public schema localTestXsd { get; set; }
@@ -16,9 +17,8 @@ namespace W3C.XSD.Tests
         public void Setup()
         {
             XmlXsd = schema.Load(@"xml.xsd");
-            var xmlXsdv1a = new FileInfo(@"xsdschema (ms-visualstudio version).xsd");
-            var xmlXsdv1b = new FileInfo(@"XMLSchema_v1.xsd");
-            XsdXsd = schema.Load(xmlXsdv1b);
+            XsdXsd = schema.Load(new FileInfo(@"XMLSchema_v1.xsd"));
+            XsdXsdVsVersion = schema.Load(new FileInfo(@"xsdschema (ms-visualstudio version).xsd"));
             localTestXsd = schema.Load(@"localTest.xsd");
             localIncludedXsd = schema.Load(@"localIncluded.xsd");
         }
