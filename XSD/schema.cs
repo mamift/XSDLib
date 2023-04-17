@@ -11,7 +11,7 @@ using Xml.Schema.Linq.Extensions;
 
 namespace W3C.XSD
 {
-    public partial class schema
+    public partial class schema : schemaInterface
     {
         /// <summary>
         /// Loads a new <see cref="schema"/> from an existing <see cref="System.IO.FileInfo"/>.
