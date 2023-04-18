@@ -7,6 +7,18 @@ namespace W3C.XSD;
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 public partial class group
 {
+    protected bool Equals(group other) => Equals(ContentField, other.ContentField);
+
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((group) obj);
+    }
+
+    public override int GetHashCode() => (ContentField != null ? ContentField.GetHashCode() : 0);
+
     private sealed class ContentFieldEqualityComparer : IEqualityComparer<group>
     {
         public bool Equals(group x, group y)
@@ -15,8 +27,6 @@ public partial class group
             if (ReferenceEquals(x, null)) return false;
             if (ReferenceEquals(y, null)) return false;
             if (x.GetType() != y.GetType()) return false;
-
-            throw new NotImplementedException($"No equality members defined for {nameof(namedGroup)}");
 
             return Equals(x.ContentField, y.ContentField);
         }
