@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Linq.Expressions;
 using Xml.Schema.Linq;
 
 namespace W3C.XSD.Extensions;
@@ -8,6 +11,22 @@ namespace W3C.XSD.Extensions;
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 public static partial class IListExtensions
 {
+    public static bool AddIfNotExists<T>(this IList<T> list, T thing)
+        where T: XTypedElement
+    {
+        var equalityComparer = EqualityComparer<T>.Default;
+        var possibleExisting = list.FirstOrDefault(e => equalityComparer.Equals(e, thing));
+
+        throw new NotImplementedException();
+
+        if (possibleExisting == default(T)) {
+            list.Add(thing);
+            return true;
+        }
+
+        return false;
+    }
+
     public static void AddRange<T>(this IList<T> list, IEnumerable<T> others)
         where T: XTypedElement
     {
