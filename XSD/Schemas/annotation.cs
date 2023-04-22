@@ -7,7 +7,7 @@ public partial class annotation
     protected bool Equals(annotation other)
     {
         return Equals(appinfo, other.appinfo) &&
-               Equals(documentationField, other.documentationField) &&
+               Equals(documentation, other.documentation) &&
                Equals(id, other.id);
     }
 

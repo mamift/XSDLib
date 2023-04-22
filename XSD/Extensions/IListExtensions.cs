@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -11,13 +10,13 @@ namespace W3C.XSD.Extensions;
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 public static partial class IListExtensions
 {
-    public static bool AddIfNotExists<T>(this IList<T> list, T thing)
+    public static bool AddIfNotExists<T>(this IList<T> list, T thing, IEqualityComparer<T> equalityComparer)
         where T: XTypedElement
     {
-        var equalityComparer = EqualityComparer<T>.Default;
-        var possibleExisting = list.FirstOrDefault(e => equalityComparer.Equals(e, thing));
-
-        throw new NotImplementedException();
+        var possibleExisting = list.FirstOrDefault(e => {
+            var wasEqual = equalityComparer.Equals(e, thing);
+            return wasEqual;
+        });
 
         if (possibleExisting == default(T)) {
             list.Add(thing);

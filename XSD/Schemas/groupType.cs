@@ -8,11 +8,11 @@ public abstract partial class groupType
 {
     protected bool Equals(groupType other)
     {
-        var e = Equals(element, other.element);
-        var g = group.SequenceEqual(other.group, XSD.groupRef.EqualityComparer);
+        var e = element.SequenceEqual(other.element, XSD.elementType.EqualityComparer);
+        var g = group.SequenceEqual(other.group, XSD.groupType.EqualityComparer);
         var f = all.SequenceEqual(other.all, XSD.all.EqualityComparer);
         var c = choice.SequenceEqual(other.choice, XSD.choice.EqualityComparer);
-        var s = Equals(sequence, other.sequence);
+        var s = sequence.SequenceEqual(other.sequence, XSD.sequence.EqualityComparer);
         var a = Equals(any, other.any);
         var n = Equals(name, other.name);
         var r = Equals(@ref, other.@ref);
@@ -51,7 +51,7 @@ public abstract partial class groupType
         }
     }
 
-    private sealed class GroupTypeEqualityComparer : IEqualityComparer<groupType>
+    private sealed class groupTypeEqualityComparer : IEqualityComparer<groupType>
     {
         public bool Equals(groupType x, groupType y)
         {
@@ -65,5 +65,5 @@ public abstract partial class groupType
         public int GetHashCode(groupType obj) => obj.GetHashCode();
     }
 
-    public static IEqualityComparer<groupType> EqualityComparer { get; } = new GroupTypeEqualityComparer();
+    public static IEqualityComparer<groupType> EqualityComparer { get; } = new groupTypeEqualityComparer();
 }

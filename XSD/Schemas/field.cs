@@ -6,7 +6,9 @@ public partial class field
 {
     protected bool Equals(field other)
     {
-        return Equals(annotation, other.annotation) && Equals(id, other.id) && Equals(xpath, other.xpath);
+        return Equals(annotation, other.annotation) &&
+               Equals(id, other.id) &&
+               Equals(xpath, other.xpath);
     }
 
     public override bool Equals(object obj)
