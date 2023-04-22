@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace W3C.XSD;
 
@@ -7,16 +8,26 @@ public abstract partial class groupType
 {
     protected bool Equals(groupType other)
     {
-        return Equals(elementField, other.elementField) &&
-               Equals(groupField, other.groupField) &&
-               Equals(allField, other.allField) &&
-               Equals(choiceField, other.choiceField) &&
-               Equals(sequenceField, other.sequenceField) &&
-               Equals(anyField, other.anyField) &&
-               Equals(name, other.name) &&
-               Equals(@ref, other.@ref) &&
-               Equals(minOccurs, other.minOccurs) &&
-               Equals(maxOccurs, other.maxOccurs);
+        var e = Equals(element, other.element);
+        var g = group.SequenceEqual(other.group, XSD.groupRef.EqualityComparer);
+        var f = all.SequenceEqual(other.all, XSD.all.EqualityComparer);
+        var c = choice.SequenceEqual(other.choice, XSD.choice.EqualityComparer);
+        var s = Equals(sequence, other.sequence);
+        var a = Equals(any, other.any);
+        var n = Equals(name, other.name);
+        var r = Equals(@ref, other.@ref);
+        var min = Equals(minOccurs, other.minOccurs);
+        var max = Equals(maxOccurs, other.maxOccurs);
+        return e &&
+               g &&
+               f &&
+               c &&
+               s &&
+               a &&
+               n &&
+               r &&
+               min &&
+               max;
     }
 
     public override bool Equals(object obj)
@@ -54,5 +65,5 @@ public abstract partial class groupType
         public int GetHashCode(groupType obj) => obj.GetHashCode();
     }
 
-    public static IEqualityComparer<groupType> GroupTypeComparer { get; } = new GroupTypeEqualityComparer();
+    public static IEqualityComparer<groupType> EqualityComparer { get; } = new GroupTypeEqualityComparer();
 }
